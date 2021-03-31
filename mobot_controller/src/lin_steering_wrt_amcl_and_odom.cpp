@@ -65,7 +65,7 @@ void SteeringController::initializeSubscribers() {
     
     //odom_subscriber_ = nh_.subscribe("/odom", 1, &SteeringController::odomCallback, this); //subscribe to odom messages
     // add more subscribers here, as needed
-    des_state_subscriber_ = nh_.subscribe("/desState", 1, &SteeringController::desStateCallback, this); // for desired state messages
+    des_state_subscriber_ = nh_.subscribe("/desired_state", 1, &SteeringController::desStateCallback, this); // for desired state messages
 }
 
 //member helper function to set up publishers;
@@ -209,8 +209,8 @@ void SteeringController::lin_steering_algorithm() {
         controller_omega = 0;
 
     case FORWARD:
-        controller_speed = des_state_vel_;// + K_TRIP_DIST * trip_dist_err; //speed up/slow down to null out
-        controller_omega = 0; //des_state_omega_ + K_PHI * heading_err + K_DISP * lateral_err;
+        controller_speed = des_state_vel_ + K_TRIP_DIST * trip_dist_err; //speed up/slow down to null out
+        controller_omega = des_state_omega_ + K_PHI * heading_err + K_DISP * lateral_err;
 
         controller_omega = MAX_OMEGA * sat(controller_omega / MAX_OMEGA); // saturate omega command at specified limits
         break;
@@ -223,8 +223,8 @@ void SteeringController::lin_steering_algorithm() {
         break;
 
     case HALT:
-        controller_speed = 0; //speed up/slow down to null out
-        controller_omega = des_state_omega_ + K_PHI * heading_err + K_DISP * lateral_err;
+        controller_speed = des_state_vel_; //speed up/slow down to null out
+        controller_omega = des_state_omega_;
 
         controller_omega = MAX_OMEGA * sat(controller_omega / MAX_OMEGA); // saturate omega command at specified limits
         break;

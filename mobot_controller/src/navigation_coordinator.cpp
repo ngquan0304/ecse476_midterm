@@ -128,36 +128,23 @@ int main(int argc, char **argv)
 
     TrajBuilder trajBuilder;
 
+    float x_g = 3.903 - 0.2;
+    float y_g = 0.412 + 0.1;
+
     float x_i = current_pose.pose.position.x;
     float y_i = current_pose.pose.position.y;
 
     ROS_INFO("STEP 1");
-    tryMove(x_i + 1, y_i, 1);
+    tryMove(x_g/2, y_g, 1);
 
     x_i = current_pose.pose.position.x;
     y_i = current_pose.pose.position.y;
 
     ROS_INFO("STEP 2");
-    tryMove(x_i, y_i -1, 1);
+    tryMove(x_g, y_g, 1);
 
     x_i = current_pose.pose.position.x;
     y_i = current_pose.pose.position.y;
-
-    ROS_INFO("STEP 3");
-    tryMove(x_i - 1, y_i, 1);
-
-    x_i = current_pose.pose.position.x;
-    y_i = current_pose.pose.position.y;
-
-    ROS_INFO("STEP 4");
-    tryMove(x_i, y_i + 1, 1);
-
-    // orientation fix: rotate after final translation.
-    ros::spinOnce();
-    float x_current = current_pose.pose.position.x;
-    float y_current = current_pose.pose.position.y;
-    ROS_INFO("STEP: Reorienting back to original pose");
-    tryMove(x_current + 0.01, y_current, 1);
 
     // stop everything
     stop();
