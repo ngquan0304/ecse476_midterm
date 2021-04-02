@@ -128,8 +128,8 @@ int main(int argc, char **argv)
 
     TrajBuilder trajBuilder;
 
-    float x_g = 3.903 - 0.2;
-    float y_g = 0.412 + 0.1;
+    float x_g = 3.903 - 0.1;
+    float y_g = 0.412;
 
     float x_i = current_pose.pose.position.x;
     float y_i = current_pose.pose.position.y;

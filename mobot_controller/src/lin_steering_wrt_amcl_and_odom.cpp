@@ -207,6 +207,7 @@ void SteeringController::lin_steering_algorithm() {
     case STOP:
         controller_speed = 0;
         controller_omega = 0;
+        break;
 
     case FORWARD:
         controller_speed = des_state_vel_ + K_TRIP_DIST * trip_dist_err; //speed up/slow down to null out
