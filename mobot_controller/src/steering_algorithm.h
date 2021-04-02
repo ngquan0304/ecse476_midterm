@@ -36,8 +36,9 @@
 const double UPDATE_RATE = 50.0; // choose the desired-state publication update rate
 const double K_PHI = 1.0; // control gains for steering
 const double K_PHI_D = 0.4;
-const double K_DISP = 0.5;
-const double K_TRIP_DIST = 0.0;
+const double K_DISP = 0.25; // k_d = (k_phi/2)^2
+const double K_TRIP_DIST = 1.0;
+
 // dynamic limitations:  these apply to the steering controller; they may be larger than the limits on des state generation
 const double MAX_SPEED = 1.0; // m/sec; adjust this
 const double MAX_OMEGA = 1.0; // rad/sec; adjust this
@@ -91,7 +92,8 @@ private:
     
     //state values from desired state; these will get filled in by desStateCallback
     nav_msgs::Odometry des_state_; 
-    geometry_msgs::Pose des_state_pose_;    
+    geometry_msgs::Pose des_state_pose_;
+    int des_state_mode;    
     double des_state_vel_;
     double des_state_omega_;
     double des_state_x_;

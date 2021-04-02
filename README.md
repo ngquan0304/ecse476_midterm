@@ -42,11 +42,11 @@ Start mobot_controller's nodes:
 
 ~~`rosrun mobot_controller lin_steering_wrt_odom`~~ This node is deprecated
 
-`rosrun mobot_controller 
-
 `rosrun mobot_controller current_state_publisher`
 
 `rosrun mobot_controller des_state_publisher_service`
+
+`rosrun mobot_controller lin_steering_wrt_amcl_and_odom`
 
 ## Running tests/demos
 In rviz, give the robot an approximate starting pose.
